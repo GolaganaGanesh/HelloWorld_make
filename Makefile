@@ -1,5 +1,11 @@
-CC=gcc
-CFLAGS=-I.
+# Makefile
 
-hello-world: main.c
-	$(CC) -o hello-world main.c $(CFLAGS)
+.PHONY: all clean package
+
+all: clean package
+
+clean:
+    rm -rf dist/ build/ *.egg-info/
+
+package:
+    python setup.py sdist bdist_wheel
