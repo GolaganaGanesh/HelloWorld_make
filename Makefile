@@ -1,11 +1,21 @@
 # Makefile
 
-.PHONY: all clean package
+# Variables
+APP_NAME = my_flask_app
+VERSION = 1.0.0
 
-all: clean package
+# Targets
+.PHONY: all clean build package
+
+all: clean build package
 
 clean:
-    rm -rf dist/ build/ *.egg-info/
+    rm -rf dist/
+
+build:
+    # You can add any additional build steps here
 
 package:
-    python setup.py sdist bdist_wheel
+    mkdir -p dist/$(APP_NAME)-$(VERSION)
+    cp -r * dist/$(APP_NAME)-$(VERSION)/
+    tar -czvf dist/$(APP_NAME)-$(VERSION).tar.gz -C dist $(APP_NAME)-$(VERSION)
